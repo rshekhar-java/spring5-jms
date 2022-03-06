@@ -15,20 +15,21 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Component
 public class HelloSender {
-private final JmsTemplate jmsTemplate;
 
-@Scheduled(fixedRate = 2000)
-public void sendMessage(){
-    System.out.println("I am Sending a message");
+    private final JmsTemplate jmsTemplate;
 
-    HelloWorldMessage message = HelloWorldMessage
-            .builder()
-            .id(UUID.randomUUID())
-            .message("Hello World !!")
-            .build();
-     jmsTemplate.convertAndSend(JmsConfig.MY_QUEUE,message);
+    @Scheduled(fixedRate = 2000)
+    public void sendMessage(){
+        System.out.println("I am Sending a message");
 
-     System.out.println("Message Sent Successfully!");
-}
+        HelloWorldMessage message = HelloWorldMessage
+                .builder()
+                .id(UUID.randomUUID())
+                .message("Hello World !!")
+                .build();
+         jmsTemplate.convertAndSend(JmsConfig.MY_QUEUE,message);
+
+         System.out.println("Message Sent Successfully!");
+    }
 
 }
